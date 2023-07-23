@@ -3,3 +3,4 @@ webhooks:
   - path: test
     method: GET
     url: https://webhook.site/7fcdd608-a2c1-466a-b02c-f85eb70aabd5
+    body: '{"event_type":"test-event"}'

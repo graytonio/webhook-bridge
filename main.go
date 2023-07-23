@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"io"
 	"net/http"
 	"strings"
@@ -15,6 +16,7 @@ type Webhook struct {
     Method string `mapstructure:"method"`
     URL string `mapstructure:"url"`
     Headers map[string]string `mapstructure:"headers"`
+    Body string `mapstructure:"body"`
 }
 
 type Config struct {
@@ -25,7 +27,7 @@ type Config struct {
 
 func forwardWebhook(config *Webhook) gin.HandlerFunc {
    return func(c *gin.Context) {
-    req, err := http.NewRequest(strings.ToUpper(config.Method), config.URL, nil)
+    req, err := http.NewRequest(strings.ToUpper(config.Method), config.URL, bytes.NewBuffer([]byte(config.Body)))
     if err != nil {
         c.AbortWithStatusJSON(500, map[string]interface{}{"error": err.Error()})
         return
