@@ -34,7 +34,6 @@ changelog:
       - '^test:'
 dockers:
   - image_templates:
-      - graytonio/webhook-bridge
       - ghcr.io/graytonio/webhook-bridge:latest
       - ghcr.io/graytonio/webhook-bridge:{{ .Major }}
       - ghcr.io/graytonio/webhook-bridge:{{ .Major }}.{{ .Minor }}
